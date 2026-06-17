@@ -4,24 +4,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Blog | Mahfuz Ahammed</title>
+    <style>
+    /* RESET */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
+
+    /* BACKGROUND ANIMATION */
+    body {
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .bg-animation {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, #0f172a, #1e293b, #0ea5e9, #6366f1);
+        background-size: 400% 400%;
+        animation: gradientBG 12s ease infinite;
+        z-index: -1;
+    }
+
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    /* NAVBAR */
+    .navbar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 40px;
+        background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+    }
+
+    .navbar a {
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .navbar ul {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+    }
+
+    .navbar li {
+        position: relative;
+    }
+
+    .navbar li a {
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar li a:hover {
+        background: rgba(255,255,255,0.1);
+        transform: translateY(-2px);
+    }
+
+    .navbar li a.active {
+        background: rgba(14, 165, 233, 0.3);
+        border: 1px solid rgba(14, 165, 233, 0.5);
+        box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+    }
+
+    .navbar li a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #0ea5e9;
+    }
+
+    /* SECTIONS */
+    main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 40px;
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    p {
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 30px;
+        background: rgba(0,0,0,0.4);
+    }
+
+    footer nav ul {
+        justify-content: center;
+    }
+
+    footer nav ul li {
+        padding: 0 10px;
+    }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h3><a href="index.html">Mahfuz Ahammed Shuruz</a></h3>
+
+<div class="bg-animation"></div>
+
+    <header class="navbar">
+        <h2>Mahfuz Ahammed</h2>
         <nav>
             <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-
-
+                <li><a href="index.html" class="nav-link" data-page="home">Home</a></li>
+                <li><a href="about.html" class="nav-link" data-page="about">About</a></li>
+                <li><a href="blog.html" class="nav-link" data-page="blog">Blog</a></li>
+                <li><a href="contact.html" class="nav-link" data-page="contact">Contact</a></li>
             </ul>
         </nav>
-
     </header>
     <main>
 
@@ -76,19 +198,46 @@
 
 
         <footer>
-            <h3>Mahfuz Ahammed Shuruz</h3>
+            <h3>Mahfuz Ahammed</h3>
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
-
-
                 </ul>
             </nav>
-
         </footer>
     </main>
+
+<script>
+// navbar active state
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+
+    // smooth page transition
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetPage = this.getAttribute('href');
+            if (targetPage !== currentPage) {
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => {
+                    window.location.href = targetPage;
+                }, 300);
+            }
+        });
+    });
+});
+</script>
 
 </body>
 
