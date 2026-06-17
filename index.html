@@ -1,81 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my portfolio</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahfuz Ahammed | Software Engineer</title>
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* BACKGROUND ANIMATION */
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.bg-animation {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, #0f172a, #1e293b, #0ea5e9, #6366f1);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* NAVBAR */
+.navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+/* HERO */
+.hero {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 80px 40px;
+}
+
+.hero img {
+    width: 280px;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.hero img:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+/* BUTTON */
+.btn-glow {
+    padding: 10px 20px;
+    border: none;
+    background: #0ea5e9;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 20px #0ea5e9;
+    transform: translateY(-3px);
+}
+
+/* SECTIONS */
+section {
+    padding: 60px 40px;
+}
+
+/* SKILLS */
+.skills ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skills li {
+    list-style: none;
+    padding: 8px 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+}
+
+/* PROJECTS */
+.project-card {
+    margin: 10px 0;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.2);
+}
+
+/* REVEAL */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: rgba(0,0,0,0.4);
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <h3><a href="index.html">Mahfuz Ahammed Shuruz</a></h3>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html">Project's</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-            
-            
-                </ul>
-            </nav>
 
-    </header>
-<main>
+<div class="bg-animation"></div>
 
-    <h1>My Portfolio Website</h1>
-    <h2>Assalamu Alaikum</h2>
-    <p>
-    I am Mahfuz Ahammed, curently final year student of dhaka university of engineering and technology major of computer science and engineering.    
-    I am a hard working, honest individual. I am a good timekeeper, always willing to learn new skills. 
-    I am friendly, helpful and polite, have a good sense of humour. 
-    I am able to work independently in busy environments and also within a team setting. 
-    I am outgoing and tactful, and able to listen effectively when solving problems.
-    </p>
+<!-- NAV -->
+<header class="navbar">
+    <h2>Mahfuz Ahammed</h2>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <figure> 
-        <img src="kari-shea-1SAnrIxw5OY-unsplash.jpg" alt="a laptop sitting on the wood">
-        <figcaption>its my favorite laptop that i using </figcaption>
-    </figure>
-    
-    
-    <p>
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its
-        layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
-        'Content here, content here', making it look like readable English.
-    </p>
+<!-- HERO -->
+<section class="hero reveal">
+    <div>
+        <h1 class="typing"></h1>
+        <h2>Software Engineer | .NET Developer</h2>
+        <p>I build scalable web applications using ASP.NET Core, Angular, and SQL Server.</p>
 
-        <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-            standard
-            dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-            specimen
-            book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-            unchanged.
-        </p>
-        <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-            standard
-            dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-            specimen
-            book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-            unchanged.
-        </p>
-    <footer>
-        <h3>Mahfuz Ahammed Shuruz</h3>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-        
-        
-            </ul>
-        </nav>
-        
-    </footer>
-</main>
-    
+        <br>
+        <button class="btn-glow">About Me</button>
+        <button class="btn-glow">Contact</button>
+    </div>
+
+    <img src="photo_2023-02-12_16-21-00.jpg" />
+</section>
+
+<!-- SUMMARY -->
+<section class="reveal">
+    <h2>Professional Summary</h2>
+    <p>Experienced Software Engineer working on enterprise systems, APIs, and automation tools.</p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills reveal">
+    <h2>Skills</h2>
+    <ul>
+        <li>ASP.NET Core</li>
+        <li>C#</li>
+        <li>Angular</li>
+        <li>SQL Server</li>
+        <li>JavaScript</li>
+        <li>Git</li>
+        <li>REST API</li>
+    </ul>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="reveal">
+    <h2>Projects</h2>
+
+    <div class="project-card">Karigor - Siemens Energy Workflow System</div>
+    <div class="project-card">Business Express - BAT VAT System</div>
+    <div class="project-card">School Management System</div>
+    <div class="project-card">Employee Management System</div>
+</section>
+
+<!-- CONTACT -->
+<section class="reveal">
+    <h2>Let's Work Together</h2>
+    <button class="btn-glow">Get In Touch</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Mahfuz Ahammed</p>
+</footer>
+
+<script>
+// typing effect
+const text = "Hello, I'm Mahfuz Ahammed";
+let i = 0;
+
+function type() {
+    if (i < text.length) {
+        document.querySelector(".typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 80);
+    }
+}
+type();
+
+// scroll animation
+window.addEventListener("scroll", () => {
+    document.querySelectorAll(".reveal").forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            el.classList.add("active");
+        }
+    });
+});
+</script>
+
 </body>
 </html>
