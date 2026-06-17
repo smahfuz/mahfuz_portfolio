@@ -134,6 +134,17 @@
         min-width: 200px;
     }
 
+    /* Fix for dropdown options - white background with dark text */
+    .search-box select option {
+        background: #1e293b;
+        color: white;
+    }
+
+    /* For browsers that use system colors */
+    .search-box select {
+        color: white;
+    }
+
     .search-box input::placeholder {
         color: rgba(255,255,255,0.7);
     }
@@ -229,7 +240,7 @@
 
     <main>
         <h1>Blood Group Search (Village)</h1>
-        <h2>Find Blood Donors in Your Village</h2>
+        <h2>Find Blood Donors in Bishnupur Village</h2>
 
         <div class="search-container">
             <div class="search-box">
