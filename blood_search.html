@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Group Search | Mahfuz Ahammed</title>
+    <style>
+    /* RESET */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
+
+    /* BACKGROUND ANIMATION */
+    body {
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .bg-animation {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, #0f172a, #1e293b, #0ea5e9, #6366f1);
+        background-size: 400% 400%;
+        animation: gradientBG 12s ease infinite;
+        z-index: -1;
+    }
+
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    /* NAVBAR */
+    .navbar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 40px;
+        background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+    }
+
+    .navbar a {
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s ease;
+    }
+
+    .navbar ul {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+    }
+
+    .navbar li {
+        position: relative;
+    }
+
+    .navbar li a {
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .navbar li a:hover {
+        background: rgba(255,255,255,0.1);
+        transform: translateY(-2px);
+    }
+
+    .navbar li a.active {
+        background: rgba(14, 165, 233, 0.3);
+        border: 1px solid rgba(14, 165, 233, 0.5);
+        box-shadow: 0 0 15px rgba(14, 165, 233, 0.3);
+    }
+
+    .navbar li a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #0ea5e9;
+    }
+
+    /* SECTIONS */
+    main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 40px;
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* SEARCH BOX */
+    .search-container {
+        background: rgba(255,255,255,0.1);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+
+    .search-box {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .search-box input, .search-box select {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.2);
+        color: white;
+        font-size: 16px;
+        min-width: 200px;
+    }
+
+    .search-box input::placeholder {
+        color: rgba(255,255,255,0.7);
+    }
+
+    .search-box button {
+        padding: 12px 30px;
+        border: none;
+        background: #0ea5e9;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .search-box button:hover {
+        box-shadow: 0 0 20px #0ea5e9;
+        transform: translateY(-3px);
+    }
+
+    /* DATA TABLE */
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255,255,255,0.1);
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .data-table th, .data-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .data-table th {
+        background: rgba(14, 165, 233, 0.3);
+        font-weight: bold;
+    }
+
+    .data-table tr:hover {
+        background: rgba(255,255,255,0.1);
+    }
+
+    .blood-group {
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        background: rgba(239, 68, 68, 0.3);
+        font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 30px;
+        background: rgba(0,0,0,0.4);
+    }
+
+    footer nav ul {
+        justify-content: center;
+    }
+
+    footer nav ul li {
+        padding: 0 10px;
+    }
+
+    .no-data {
+        text-align: center;
+        padding: 40px;
+        color: rgba(255,255,255,0.7);
+    }
+    </style>
+</head>
+
+<body>
+
+<div class="bg-animation"></div>
+
+    <header class="navbar">
+        <h2>Mahfuz Ahammed</h2>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav-link" data-page="home">Home</a></li>
+                <li><a href="about.html" class="nav-link" data-page="about">About</a></li>
+                <li><a href="blog.html" class="nav-link" data-page="blog">Blog</a></li>
+                <li><a href="contact.html" class="nav-link" data-page="contact">Contact</a></li>
+                <li><a href="blood_search.html" class="nav-link" data-page="blood_search">Blood Group Search (Village)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Blood Group Search (Village)</h1>
+        <h2>Find Blood Donors in Your Village</h2>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchName" placeholder="Search by name...">
+                <select id="bloodGroup">
+                    <option value="">All Blood Groups</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+                <input type="text" id="searchVillage" placeholder="Search by village...">
+                <button onclick="searchData()">Search</button>
+            </div>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Blood Group</th>
+                    <th>Phone</th>
+                    <th>Address/Village</th>
+                </tr>
+            </thead>
+            <tbody id="dataTable">
+                <!-- Data will be populated here -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <h3>Mahfuz Ahammed</h3>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <p>© 2026 Mahfuz Ahammed. All Rights Reserved.</p>
+    </footer>
+
+<script>
+// Blood donor data from Excel
+const bloodDonors = [
+    { name: "মাহফুজ আহাম্মেদ", bloodGroup: "O+", phone: "01717678575", village: "বিষ্ণুপুর মাঝের পাড়া" },
+    { name: "হুসাইন আহমেদ", bloodGroup: "O+", phone: "01406128368", village: "বিষ্ণুপুর" },
+    { name: "Md sojib hossain", bloodGroup: "O+", phone: "01996016259", village: "Bishnupur bajar para" },
+    { name: "Md. Beplob Hossen", bloodGroup: "A-", phone: "01733000991", village: "Bishnopur, Damurhuda, Chuadanga" },
+    { name: "Raju Ahamed", bloodGroup: "B+", phone: "01965838902", village: "Bishnupur, Eidgaoh para" },
+    { name: "Md. Al Sany", bloodGroup: "A+", phone: "01903249896", village: "Bishnupur" },
+    { name: "মোঃ আহসানুল হক", bloodGroup: "AB+", phone: "01797542972", village: "বিষ্ণুপুর মাঝের পাড়া" },
+    { name: "Md.Abubakar Siddik", bloodGroup: "B-", phone: "01711076709", village: "Bishnupur" },
+    { name: "মোঃ শাখাওয়াত হোসেন", bloodGroup: "AB+", phone: "01967988159", village: "বিষ্ণুপুর ,শেখপাড়া" },
+    { name: "Md Sajol Ahammed", bloodGroup: "A+", phone: "01994098849", village: "মাঝের পাড়া,বিষ্ণুপুর" },
+    { name: "Mahbubur Rahman Antor", bloodGroup: "O+", phone: "01979674499", village: "Bishnupur,mastar para" },
+    { name: "মোঃ তায়েব আলী", bloodGroup: "AB+", phone: "01985281981", village: "বিষ্ণুপুর,মাঝেরপাড়া" },
+    { name: "Md.Tayeb Ali", bloodGroup: "AB+", phone: "01985281981", village: "Bishnupur, majer para" },
+    { name: "মোঃ সাকিব হোসেন", bloodGroup: "B+", phone: "01305237643", village: "বিষ্ণুপুর" },
+    { name: "মোঃ মাসুদ রানা", bloodGroup: "B+", phone: "01883484001", village: "বিষ্ণুপুর দক্ষিন পাড়া" },
+    { name: "জাহিদ বিন ইউসুফ", bloodGroup: "A+", phone: "01965838956", village: "বিষ্ণুপুর বড় মসজিদ পাড়া" },
+    { name: "মোঃ রাকিবুল ইসলাম", bloodGroup: "A+", phone: "01936179574", village: "বিষ্ণুপুর" },
+    { name: "Md Ekramul Haque", bloodGroup: "A+", phone: "01767282622", village: "Bishnupur, Dokkhinpara" },
+    { name: "Md Al Sadik", bloodGroup: "B+", phone: "01988514421", village: "Bishnupur bazar para" },
+    { name: "মোঃ জীবন আলী", bloodGroup: "A+", phone: "01817556203", village: "বিষ্ণুপুর ঈদগাপাড়া" },
+    { name: "Hussain Ahmed", bloodGroup: "O+", phone: "01860744550", village: "Bishnupur, Master Para" },
+    { name: "Md Ismail Hosen", bloodGroup: "B+", phone: "01748201667", village: "Bishnupur" },
+    { name: "রিফাত মাহমুদ", bloodGroup: "A+", phone: "01966890138", village: "বিষ্ণুপুর" },
+    { name: "TOFAEEL AHAMMED", bloodGroup: "AB+", phone: "01123531359", village: "Bishnupur mosjid para" },
+    { name: "Md.Sabbir Hossain", bloodGroup: "A+", phone: "01571353013", village: "Bishnupur. Master para" },
+    { name: "আল আমিন", bloodGroup: "A-", phone: "01951957461", village: "বিষ্ণুপুর মাস্টার পাড়া" },
+    { name: "Ashiqur Rahman Tipu", bloodGroup: "B+", phone: "01990633470", village: "Bishnupur..Majharpara" },
+    { name: "মোঃ আবু সাঈদ", bloodGroup: "AB+", phone: "01986462737", village: "মজারপোতা, দামুড়হুদা, চুয়াডাঙ্গা" },
+    { name: "md akash ali", bloodGroup: "B+", phone: "01904874216", village: "Bishnupurr" },
+    { name: "মোঃ হৃদয় আহামেদ", bloodGroup: "AB+", phone: "01322111978", village: "বিষ্ণুপুর,  মন্ডলপাড়া" },
+    { name: "Mustafiz", bloodGroup: "O+", phone: "01403327592", village: "Bishnupur, majhpara" },
+    { name: "Md. Milon Hossain", bloodGroup: "B+", phone: "01924593966", village: "Bishnupur high school para" },
+    { name: "জাহিদুল ইসলাম", bloodGroup: "A+", phone: "01965838956", village: "বিষ্ণুপুর বড় মসজিদ পাড়া" },
+    { name: "MD.Harun Ali", bloodGroup: "B+", phone: "01746940530", village: "Bishnupur uttor para" },
+    { name: "Biklas", bloodGroup: "O+", phone: "01608512759", village: "Bishnupur" },
+    { name: "Al Amin", bloodGroup: "A+", phone: "01786021064", village: "দামুড়হুদা বাসইষ্ট্যান্ড" },
+    { name: "মোঃ তৌফিকুর রহমান (শিহাব)", bloodGroup: "O+", phone: "01924089819", village: "শেখপাড়া,বিষ্ণুপুর" },
+    { name: "আশিকুর রহমান (টিপু)", bloodGroup: "B+", phone: "01990633470", village: "বিষ্ণুপুর মসজিদ পাড়া" },
+    { name: "Md. Mahabub Hossain", bloodGroup: "A+", phone: "01515640623", village: "পুলিশ ক্যাম্প পাড়া" },
+    { name: "মোঃ আবু সাঈদ", bloodGroup: "AB+", phone: "01986462737", village: "মজারপোতা, দামুড়হুদা, চুয়াডাঙ্গা" }
+];
+
+// Display all data on page load
+function displayData(data) {
+    const tableBody = document.getElementById('dataTable');
+    tableBody.innerHTML = '';
+    
+    if (data.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="4" class="no-data">No donors found matching your search criteria.</td></tr>';
+        return;
+    }
+    
+    data.forEach(donor => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${donor.name}</td>
+            <td><span class="blood-group">${donor.bloodGroup}</span></td>
+            <td>${donor.phone}</td>
+            <td>${donor.village}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Search functionality
+function searchData() {
+    const searchName = document.getElementById('searchName').value.toLowerCase();
+    const bloodGroup = document.getElementById('bloodGroup').value;
+    const searchVillage = document.getElementById('searchVillage').value.toLowerCase();
+    
+    const filteredData = bloodDonors.filter(donor => {
+        const matchName = donor.name.toLowerCase().includes(searchName);
+        const matchBloodGroup = bloodGroup === '' || donor.bloodGroup === bloodGroup;
+        const matchVillage = donor.village.toLowerCase().includes(searchVillage);
+        
+        return matchName && matchBloodGroup && matchVillage;
+    });
+    
+    displayData(filteredData);
+}
+
+// navbar active state
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+
+    // smooth page transition
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetPage = this.getAttribute('href');
+            if (targetPage !== currentPage) {
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => {
+                    window.location.href = targetPage;
+                }, 300);
+            }
+        });
+    });
+
+    // Display initial data
+    displayData(bloodDonors);
+});
+</script>
+
+</body>
+
+</html>
