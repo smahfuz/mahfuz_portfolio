@@ -5,30 +5,217 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume | Mahfuz Ahammed</title>
+    <!-- Load PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
         body,
         html {
             width: 100%;
             height: 100%;
+            background-color: #0f172a;
+            color: white;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        iframe {
+        /* TOP BAR */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .top-bar h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-download {
+            background: #0ea5e9;
+            border: 1px solid #0ea5e9;
+            color: white;
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-download:hover {
+            background: #0284c7;
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
+            transform: translateY(-1px);
+        }
+
+        /* PDF CONTAINER */
+        .pdf-container {
+            flex-grow: 1;
             width: 100%;
+            height: calc(100% - 70px);
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #1e293b;
+        }
+
+        .pdf-page-canvas {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            max-width: 100%;
+            background: white;
+            border-radius: 4px;
+        }
+
+        /* LOADING SPINNER */
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             height: 100%;
-            border: none;
+            gap: 15px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #0ea5e9;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 
 <body>
-    <iframe src="files/MahfuzResume_2026-04-18.pdf"></iframe>
+
+    <div class="top-bar">
+        <h1>Mahfuz_Resume.pdf</h1>
+        <div class="btn-group">
+            <a href="about.html" class="btn btn-back">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                </svg>
+                Back
+            </a>
+            <a href="MahfuzResume_2026-04-18.pdf" download class="btn btn-download">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M5,20H19V18H5V20M19,9H15V3H9V9H5L12,16L19,9Z" />
+                </svg>
+                Download PDF
+            </a>
+        </div>
+    </div>
+
+    <div class="pdf-container" id="pdf-viewer-container">
+        <div class="loading-spinner" id="loading">
+            <div class="spinner"></div>
+            <p>Resume Loading...</p>
+        </div>
+    </div>
+
+    <script>
+        // Set worker source path for PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        const url = 'MahfuzResume_2026-04-18.pdf';
+
+        // Load the PDF document
+        pdfjsLib.getDocument(url).promise.then((pdf) => {
+            const container = document.getElementById('pdf-viewer-container');
+            const loading = document.getElementById('loading');
+            
+            // Remove loading spinner
+            if (loading) {
+                loading.remove();
+            }
+
+            // Render all pages in sequence
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                pdf.getPage(pageNum).then((page) => {
+                    const canvas = document.createElement('canvas');
+                    canvas.className = 'pdf-page-canvas';
+                    container.appendChild(canvas);
+
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Set responsive scale
+                    const containerWidth = container.clientWidth;
+                    const unscaledViewport = page.getViewport({ scale: 1 });
+                    
+                    // Add padding compensation
+                    const scale = (containerWidth - 40) / unscaledViewport.width;
+                    
+                    // Limit max scale to 1.5 to maintain quality and performance
+                    const viewport = page.getViewport({ scale: Math.min(scale, 1.5) });
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    const renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+                    
+                    page.render(renderContext);
+                });
+            }
+        }).catch(err => {
+            console.error('Error rendering PDF:', err);
+            const container = document.getElementById('pdf-viewer-container');
+            container.innerHTML = `
+                <div style="text-align:center; padding:50px; width:100%;">
+                    <p style="margin-bottom:20px; color:rgba(255,255,255,0.7);">Sorry, we couldn't load the resume preview in your browser.</p>
+                    <a href="${url}" download class="btn btn-download">Download PDF to View</a>
+                </div>
+            `;
+        });
+    </script>
+
 </body>
 
 </html>
