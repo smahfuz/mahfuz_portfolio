@@ -44,6 +44,7 @@
         top: 0;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 15px 40px;
         background: rgba(0,0,0,0.4);
         backdrop-filter: blur(10px);
@@ -60,6 +61,7 @@
         display: flex;
         gap: 20px;
         list-style: none;
+        align-items: center;
     }
 
     .navbar li {
@@ -96,20 +98,229 @@
         border-bottom: 6px solid #0ea5e9;
     }
 
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+        transform: scale(1.1);
+    }
+
     /* SECTIONS */
     main {
-        max-width: 900px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 60px 40px;
     }
 
     h1, h2 {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
-    p {
+    h2 {
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: normal;
+        margin-bottom: 40px;
+    }
+
+    /* BLOG GRID & CARDS */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+
+    .blog-card {
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 28px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .blog-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #0ea5e9, #6366f1);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(14, 165, 233, 0.3);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .blog-card:hover::before {
+        opacity: 1;
+    }
+
+    .blog-category {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #38bdf8;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .blog-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: white;
+        line-height: 1.4;
+    }
+
+    .blog-meta {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 15px;
+    }
+
+    .blog-excerpt {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        flex-grow: 1;
+    }
+
+    .btn-readmore {
+        align-self: flex-start;
+        padding: 10px 20px;
+        background: rgba(14, 165, 233, 0.2);
+        border: 1px solid rgba(14, 165, 233, 0.4);
+        color: #38bdf8;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-readmore:hover {
+        background: #0ea5e9;
+        color: white;
+        box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* MODAL WINDOW */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .modal.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .modal-content {
+        background: rgba(30, 41, 59, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        max-width: 800px;
+        width: 90%;
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 40px;
+        position: relative;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+    }
+
+    .modal.open .modal-content {
+        transform: translateY(0);
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+    }
+
+    .modal-header-meta {
+        color: #38bdf8;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .modal-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        color: white;
+        line-height: 1.3;
+    }
+
+    .modal-date {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 15px;
+    }
+
+    .modal-body {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1.1rem;
         line-height: 1.8;
+    }
+
+    .modal-body p {
         margin-bottom: 20px;
     }
 
@@ -118,6 +329,8 @@
         text-align: center;
         padding: 30px;
         background: rgba(0,0,0,0.4);
+        margin-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     footer nav ul {
@@ -126,6 +339,71 @@
 
     footer nav ul li {
         padding: 0 10px;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+        .navbar {
+            padding: 15px 20px;
+        }
+        .menu-toggle {
+            display: block;
+        }
+        .navbar ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            flex-direction: column;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            gap: 15px;
+            display: none;
+        }
+        .navbar ul.open {
+            display: flex;
+            animation: slideDown 0.3s ease forwards;
+        }
+        .navbar li a.active::after {
+            display: none;
+        }
+        .navbar li a {
+            display: block;
+            text-align: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        main {
+            padding: 40px 20px;
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+        }
+        .modal-content {
+            padding: 25px 20px;
+        }
+        .modal-title {
+            font-size: 1.6rem;
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
     </style>
 </head>
@@ -137,7 +415,12 @@
     <header class="navbar">
         <h2>Mahfuz Ahammed</h2>
         <nav>
-            <ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+                </svg>
+            </button>
+            <ul id="navMenu">
                 <li><a href="index.html" class="nav-link" data-page="home">Home</a></li>
                 <li><a href="about.html" class="nav-link" data-page="about">About</a></li>
                 <li><a href="blog.html" class="nav-link" data-page="blog">Blog</a></li>
@@ -147,57 +430,72 @@
             </ul>
         </nav>
     </header>
-    <main>
 
+    <main>
         <h1>Happy Blogging</h1>
         <h2>You Can Read my writing from here</h2>
-        <h3> এক সন্ধ্যার গল্প । </h3>
-        <p>
-সন্ধ্যার পর যেন চা এর আড্ডা টা ভাল জমে। সে হিসেবে রফিক মামার দোকানে চা এর অর্ডার দিয়ে শুরু হলো খোশগল্প। গল্পের কোনো আগা
-মাথা নাই। আসলে এই গল্প জিনিস টা যুগ যুগ ধরে চলে আসছে। বিভিন্ন সময় বিভিন্ন ভাবে রুপ নিয়েছে। কখনো সন্ধ্যার পর জারি গান আর
-হুকোর সাথে দারুন গল্প, কখনো মাঠে ধান লাগাতে লাগাতে ঢের গল্প, কখনো গ্রীষ্মের গরম থেকে বাচতে বাশবাগানে বসে, বটের নিচে বসে
-তাস খেলার মাঝে হাজারো গল্প কখনো আকাবাকা নিরব রাস্তায় প্রিয়জনের সাথে হেটে হেটে গল্প। আর এখন অতিশয় দেখা যায় অনলাইনে
-গ্রুপিং করে রাতদিন দিব্বি গল্প করে যাচ্ছে মানুষ। যাই হোক এই গল্পের যেন শেষ নেই। হাজার বছর ধরে এই গল্পের মাঝেই বেচে আছে
-মানুষের আশা ভরসা।<br><br><br>
-তো আমাদের গল্প টা আশেপাশের তুলনায় সাধারণত একটু ব্যাতিক্রম হয়ে থাকে। খোজ নিলে দেখা যায় যেখানেই দুই পাচ টা মানুষ আড্ডা
-দিচ্ছে সেখানে তাদের মুল টপিক্স হয়ত গার্লফ্রেন্ড, নয়ত মুভি গান এসব নিয়ে। তবে কিছু তো ব্যাতিক্রম আছে যারা এসবের বাইরে। কেউ
-পড়াশোনা নিয়ে বেজায় টেনশনে আছে সেসব নিয়ে পরিকল্পনা আটছে কেউ বা সাংসারিক ঝামেলা নিয়ে আলোচনা জপছে।
-চা আসতে দেরি হচ্ছে দেখে আমদের বন্ধু ঈমরান প্রশ্ন করে বসলো আচ্ছা রোমানিয়ান বক্সার এন্ড্রু টেইট যে মুসলিম হয়েছিল দেখলাম।
-তারপর তার কি অবস্থা। অনেক দিন খোজ খবর নেওয়াই হয়না।<br><br><br>
-পাশেই বসে ছিল আমাদের আরেক জ্ঞ্যনরাজ ফাহিম। সে সাম্প্রতিক জাতীয় আন্তর্জাতিক সব বিষয়ে খোজ খবর রাখার চেষ্টা করে। এতক্ষণে চা
-চলে এসেছে চার কাপ। আমি ঈমরান আর ফাহিম এর দিকে দুই টা চা বাড়িয়ে দিলাম আর আমি আর রাশেদ বাকি দুইটা চা তুলে নিলাম।
-এর মধ্যে দেখি ফাহিম আর ঈমরান দুজনেই চরম আলোচনা লাগিয়ে দিছে।ঈমরানের দাবি এন্ড্রু টেইট আসলে খারাপ ব্যাক্তি। তাকে নিয়ে
-প্রথম আলো আর আনন্দবাজার পত্রিকায় যেসব নিউজ দেখেছে তাতে সে এন্ড্রুর উপরে ক্ষিপ্ত। কেন ক্ষিপ্ত তার কারন এন্ড্রু নাকি মহিলা
-দের নিয়ে খারাপ ভিডিও বানানো, মহিলাদের কুকুর এর তুলনা করতো আরো কত খারাপ কাজ করত।<br><br><br>
-তো এসব শুনে ফাহিম ব্যাচারা রেগে গেছে।ওর দাবি কোনটা সত্য আর কোনটা মিথ্যা তা জাজ করার ব্যাসিক কিছু ক্রাইটেরিয়া আছে। তা না
-দেখে কোনো মানুষকে কখনো জাজ করা যায়না। এন্ড্রু টেট বক্সিং পেশা ছাড়ার পর তার মুল কাজ ছিল অনলাইনে মানুষকে প্রশিক্ষণ দেওয়া।
-আর এম্নিতেই সে ব্রিটিশ আমেরিকায় তুমুল জনপ্রিয় । তার জীবনের শুরুটাই যখন ছিল খ্রিষ্টান পরিবারে সে হিসেবে সে মাদক সহ
-বিভিন্ন নেশায় আসক্ত ছিল। আর তার অধিনে হাজার সুন্দরী মেয়েরা ছিল। তাদের সাথে আগে কি করেছে সে তার ব্যাপার। সে জাই হোক একটা
-সময় এসে এন্ড্রু পারিপার্শ্বিক বিভিন্ন বিষয়ের সাপেক্ষে বুঝতে পারে যারা ভাল কে বিশ্বাস করে এবং শয়তানের খারাপ কাজের বিপক্ষে
-সত্য কে বুঝতে চায় তাকে অবশ্যই ইসলামে কনভার্ট হতে হবে।<br><br><br>
-এর মাঝে আমি বল্লাম হ্যা সে নাকি মুসলিম ও হলো কিছু দিন আগে তার পর কি হয়েছে রে।
-ফাহিম আবার শুরু করলো তার মুল্যবান ইনফরমেটিভ বক্তব্য। আমরা তিন জন যেন তার ছাত্র সেভাবে শুনছি। সে বলছে মুসলিম দের বিষয়ে
-বিবিসি, ট্রিবিউনস, সিএনবি, স্পোর্টসকিডা এদের নিউজ একরকম আর আনন্দবাজার, প্রথম আলো, সমকাল এসব পত্রিকার নিউজ দেখবি সম্পুর্ন
-আলাদা। কারন কেউ চায় সত্য নিউজ প্রচার করতে হোক তা অল্প। আর কেউ চায় সত্যকে চাপা দিয়ে মিথ্যা নিউজ এর সাথে অশ্লীলতার অপবাদ
-দিয়ে নিউজ ছাপাতে। কারন এই উপমহাদেশে সেক্সুয়াল কন্টেন্স পাবলিক বেশি পছন্দ করে তাই মনোযোগ দিয়ে পড়ে। সেজন্য বাংলা পত্রিকা
-গুলা পড়লে তোরা এমনি বুঝবি।<br><br><br>
-ফাহিম চা শেষ করে বলছে এন্ড্রু যখন থেকে সত্য জানার চেষ্টা করেছে তখন থেকেই আরেক বক্সার টিম খান এর সংস্পর্শে থাকার চেষ্টা
-করেছে, এবং একটা সময় এসে সে তা কাছে শাহাদাত পড়ে ইসলাম গ্রহন করেছে।সেহেতু তার আগের কর্মকান্ডের জন্য যদি তার শাস্তি পেতে হয়
-তাহলে এতদিন প্রশাসন আঈন কোথায় ছিল। তখন কি পুলিশ গ্রেগতার করতে পারেনি। আসলে এন্ড্রু মুসলিম হওয়ার পর থেকেই পশ্চিমা রা একে
-একে তার একাউন্ট বন্ধ করেছে আর ভয়ভীতি দেখিয়েছে। আর নারীবাদ বিদ্বেষ বলে যা প্রচার করছে তা সম্পুর্ন এখন ভিত্তিহিন, কারন
-নারীদের পণ্য বানিয়ে যে রমরমা ব্যবসা চলছে, পর্ন ইন্ডাস্ট্রি চলছে, সোশ্যাল মিডিয়া আর বিজ্ঞাপনে নারীদের যেভাবে ব্যবহার করা
-হচ্ছে এই বিষয়ে এন্ড্রু স্পষ্ট বক্তব্য দিয়েছে। এর এসবের মুল বিষয়বস্তু হলো এন্ড্রুর ইসলাম গ্রহন করার পর জায়োনিস্ট দের মাথা
-খারাপ হয়ে গেছে।<br><br><br>
-এর মাঝে আমার সাথে থাকা রাশেদ বলছে থাক এসব নিয়ে নিজেদের মধ্যে আর ঝগড়া ঝাটি করার দরকার নাই। চল ক্যম্পাসে যেতে হবে কাল
-সকালে সিটি আছে পড়তে হবে। আমি সবার ইন্টারপ্রেটেশন শুনার পর মনে হলো ফাহিম আর ঈমরান এর ইনফরমেটিভ আলোচনা টা হয়ত রাশেদ ভেবেছে
-তর্কাতর্কি আর গ্যাঞ্জাম জাস্ট। তাই সে নেগোশিয়েট করছে। আসলে রাশেদ এই গল্প, আড্ডা, আলোচনা, বিশ্লেষণ, এর কিছুই বুঝেনা। হয়ত
-শুধু জানে চুপ করে বসে থেকে মানুষের কাছে ভাল সেজে থাকতে। হুদাই তর্কাতর্কির ভিতরে যেয়ে লাভ নাই, যদি পারি রোমান্টিক কিছু
-বিষয় বিয়ে গার্লফ্রেন্ড মুভি এসব নিয়ে ক্ষানিকটা আড্ডা মারতাম। এভাবেই রাশেদ এর মত মানুষ গুলা সমাজ কে কঠোর থেকে কঠোর বানিয়ে
-দিচ্ছে।
-(বাকি কথা পরে হবে............)
-        </p>
 
+        <div class="blog-grid">
+            <!-- Card 1: User's Original Story -->
+            <div class="blog-card">
+                <div>
+                    <div class="blog-category">Life & Story</div>
+                    <div class="blog-title">এক সন্ধ্যার গল্প ।</div>
+                    <div class="blog-meta">June 20, 2026 • 5 min read</div>
+                    <div class="blog-excerpt">
+                        সন্ধ্যার পর যেন চা এর আড্ডা টা ভাল জমে। সে হিসেবে রফিক মামার দোকানে চা এর অর্ডার দিয়ে শুরু হলো খোশগল্প। গল্পের কোনো আগা মাথা নাই। আসলে এই গল্প জিনিস টা যুগ যুগ ধরে চলে আসছে...
+                    </div>
+                </div>
+                <!-- Full Content Hidden, read by JS -->
+                <div class="full-content" style="display:none;">
+                    <p>সন্ধ্যার পর যেন চা এর আড্ডা টা ভাল জমে। সে হিসেবে রফিক মামার দোকানে চা এর অর্ডার দিয়ে শুরু হলো খোশগল্প। গল্পের কোনো আগা মাথা নাই। আসলে এই গল্প জিনিস টা যুগ যুগ ধরে চলে আসছে। বিভিন্ন সময় বিভিন্ন ভাবে রুপ নিয়েছে। কখনো সন্ধ্যার পর জারি গান আর হুকোর সাথে দারুন গল্প, কখনো মাঠে ধান লাগাতে লাগাতে ঢের গল্প, কখনো গ্রীষ্মের গরম থেকে বাচতে বাশবাগানে বসে, বটের নিচে বসে তাস খেলার মাঝে হাজারো গল্প কখনো আকাবাকা নিরব রাস্তায় প্রিয়জনের সাথে হেটে হেটে গল্প। আর এখন অতিশয় দেখা যায় অনলাইনে গ্রুপিং করে রাতদিন দিব্বি গল্প করে যাচ্ছে মানুষ। যাই হোক এই গল্পের যেন শেষ নেই। হাজার বছর ধরে এই গল্পের মাঝেই বেচে আছে মানুষের আশা ভরসা।</p>
+                    <p>তো আমাদের গল্প টা আশেপাশের তুলনায় সাধারণত একটু ব্যাতিক্রম হয়ে থাকে। খোজ নিলে দেখা যায় যেখানেই দুই পাচ টা মানুষ আড্ডা দিচ্ছে সেখানে তাদের মুল টপিক্স হয়ত গার্লফ্রেন্ড, নয়ত মুভি গান এসব নিয়ে। তবে কিছু তো ব্যাতিক্রম আছে যারা এসবের বাইরে। কেউ পড়াশোনা নিয়ে বেজায় টেনশনে আছে সেসব নিয়ে পরিকল্পনা আটছে কেউ বা সাংসারিক ঝামেলা নিয়ে আলোচনা জপছে। চা আসতে দেরি হচ্ছে দেখে আমদের বন্ধু ঈমরান প্রশ্ন করে বসলো আচ্ছা রোমানিয়ান বক্সার এন্ড্রু টেইট যে মুসলিম হয়েছিল দেখলাম। তারপর তার কি অবস্থা। অনেক দিন খোজ খবর নেওয়াই হয়না।</p>
+                    <p>পাশেই বসে ছিল আমাদের আরেক জ্ঞ্যনরাজ ফাহিম। সে সাম্প্রতিক জাতীয় আন্তর্জাতিক সব বিষয়ে খোজ খবর রাখার চেষ্টা করে। এতক্ষণে চা চলে এসেছে চার কাপ। আমি ঈমরান আর ফাহিম এর দিকে দুই টা চা বাড়িয়ে দিলাম আর আমি আর রাশেদ বাকি দুইটা চা তুলে নিলাম। এর মধ্যে দেখি ফাহিম আর ঈমরান দুজনেই চরম আলোচনা লাগিয়ে দিছে।ঈমরানের দাবি এন্ড্রু টেইট আসলে খারাপ ব্যাক্তি। তাকে নিয়ে প্রথম আলো আর আনন্দবাজার পত্রিকায় যেসব নিউজ দেখেছে তাতে সে এন্ড্রুর উপরে ক্ষিপ্ত। কেন ক্ষিপ্ত তার কারন এন্ড্রু নাকি মহিলা দের নিয়ে খারাপ ভিডিও বানানো, মহিলাদের কুকুর এর তুলনা করতো আরো কত খারাপ কাজ করতো।</p>
+                    <p>তো এসব শুনে ফাহিম ব্যাচারা রেগে গেছে।ওর দাবি কোনটা সত্য আর কোনটা মিথ্যা তা জাজ করার ব্যাসিক কিছু ক্রাইটেরিয়া আছে। তা না দেখে কোনো মানুষকে কখনো জাজ করা যায়না। এন্ড্রু টেট বক্সিং পেশা ছাড়ার পর তার মুল কাজ ছিল অনলাইনে মানুষকে প্রশিক্ষণ দেওয়া। আর এম্নিতেই সে ব্রিটিশ আমেরিকায় তুমুল জনপ্রিয় । তার জীবনের শুরুটাই যখন ছিল খ্রিষ্টান পরিবারে সে হিসেবে সে মাদক সহ বিভিন্ন নেশায় আসক্ত ছিল। আর তার অধিনে হাজার সুন্দরী মেয়েরা ছিল। তাদের সাথে আগে কি করেছে সে তার ব্যাপার। সে জাই হোক একটা সময় এসে এন্ড্রু পারিপার্শ্বিক বিভিন্ন বিষয়ের সাপেক্ষে বুঝতে পারে যারা ভাল কে বিশ্বাস করে এবং শয়তানের খারাপ কাজের বিপক্ষে সত্য কে বুঝতে চায় তাকে অবশ্যই ইসলামে কনভার্ট হতে হবে।</p>
+                    <p>এর মাঝে আমি বল্লাম হ্যা সে নাকি মুসলিম ও হলো কিছু দিন আগে তার পর কি হয়েছে রে। ফাহিম আবার শুরু করলো তার মুল্যবান ইনফরমেটিভ বক্তব্য। আমরা তিন জন যেন তার ছাত্র সেভাবে শুনছি। সে বলছে মুসলিম দের বিষয়ে বিবিসি, ট্রিবিউনস, সিএনবি, স্পোর্টসকিডা এদের নিউজ একরকম আর আনন্দবাজার, প্রথম আলো, সমকাল এসব পত্রিকার নিউজ দেখবি সম্পুর্ন আলাদা। কারন কেউ চায় সত্য নিউজ প্রচার করতে হোক তা অল্প। আর কেউ চায় সত্যকে চাপা দিয়ে মিথ্যা নিউজ এর সাথে অশ্লীলতার অপবাদ দিয়ে নিউজ ছাপাতে। কারন এই উপমহাদেশে সেক্সুয়াল কন্টেন্স পাবলিক বেশি পছন্দ করে তাই মনোযোগ দিয়ে পড়ে। সেজন্য বাংলা পত্রিকা গুলা পড়লে তোরা এমনি বুঝবি।</p>
+                    <p>ফাহিম চা শেষ করে বলছে এন্ড্রু যখন থেকে সত্য জানার চেষ্টা করেছে তখন থেকেই আরেক বক্সার টিম খান এর সংস্পর্শে থাকার চেষ্টা করেছে, এবং একটা সময় এসে সে তা কাছে শাহাদাত পড়ে ইসলাম গ্রহন করেছে।সেহেতু তার আগের কর্মকান্ডের জন্য যদি তার শাস্তি পেতে হয় তাহলে এতদিন প্রশাসন আঈন কোথায় ছিল। তখন কি পুলিশ গ্রেগতার করতে পারেনি। আসলে এন্ড্রু মুসলিম হওয়ার পর থেকেই পশ্চিমা রা একে একে তার একাউন্ট বন্ধ করেছে আর ভয়ভীতি দেখিয়েছে। আর নারীবাদ বিদ্বেষ বলে যা প্রচার করছে তা সম্পুর্ন এখন ভিত্তিহিন, কারন নারীদের পণ্য বানিয়ে যে রমরমা ব্যবসা চলছে, পর্ন ইন্ডাস্ট্রি চলছে, সোশ্যাল মিডিয়া আর বিজ্ঞাপনে নারীদের যেভাবে ব্যবহার করা হচ্ছে এই বিষয়ে এন্ড্রু স্পষ্ট বক্তব্য দিয়েছে। এর এসবের মুল বিষয়বস্তু হলো এন্ড্রুর ইসলাম গ্রহন করার পর জায়োনিস্ট দের মাথা খারাপ হয়ে গেছে।</p>
+                    <p>এর মাঝে আমার সাথে থাকা রাশেদ বলছে থাক এসব নিয়ে নিজেদের মধ্যে আর ঝগড়া ঝাটি করার দরকার নাই। চল ক্যম্পাসে যেতে হবে কাল সকালে সিটি আছে পড়তে হবে। আমি সবার ইন্টারপ্রেটেশন শুনার পর মনে হলো ফাহিম আর ঈমরান এর ইনফরমেটিভ আলোচনা টা হয়ত রাশেদ ভেবেছে তর্কাতর্কি আর গ্যাঞ্জাম জাস্ট। তাই সে নেগোশেইট করছে। আসলে রাশেদ এই গল্প, আড্ডা, আলোচনা, বিশ্লেষণ, এর কিছুই বুঝেনা। হয়ত শুধু জানে চুপ করে বসে থেকে মানুষের কাছে ভাল সেজে থাকতে। হুদাই তর্কাতর্কির ভিতরে যেয়ে লাভ নাই, যদি পারি রোমান্টিক কিছু বিষয় বিয়ে গার্লফ্রেন্ড মুভি এসব নিয়ে ক্ষানিকটা আড্ডা মারতাম। এভাবেই রাশেদ এর মত মানুষ গুলা সমাজ কে কঠোর থেকে কঠোর বানিয়ে দিচ্ছে।</p>
+                    <p>(বাকি কথা পরে হবে............)</p>
+                </div>
+                <button class="btn-readmore">Read More</button>
+            </div>
 
+            <!-- Card 2: Web Development Career Guidance -->
+            <div class="blog-card">
+                <div>
+                    <div class="blog-category">Technology</div>
+                    <div class="blog-title">ওয়েব ডেভেলপমেন্টের বর্তমান ও ভবিষ্যৎ</div>
+                    <div class="blog-meta">June 25, 2026 • 4 min read</div>
+                    <div class="blog-excerpt">
+                        বর্তমান যুগে ওয়েব ডেভেলপমেন্টের ক্ষেত্রটি অত্যন্ত দ্রুত পরিবর্তিত হচ্ছে। নতুন নতুন ফ্রেমওয়ার্ক এবং এআই (AI) টুলের আগমনে ডেভলপারদের কাজের ধরণ বদলে যাচ্ছে...
+                    </div>
+                </div>
+                <div class="full-content" style="display:none;">
+                    <p>বর্তমান যুগে ওয়েব ডেভেলপমেন্টের ক্ষেত্রটি অত্যন্ত দ্রুত পরিবর্তিত হচ্ছে। নতুন নতুন ফ্রেমওয়ার্ক এবং এআই (AI) টুলের আগমনে ডেভলপারদের কাজের ধরণ বদলে যাচ্ছে। এখন শুধু কোড করতে জানাটাই যথেষ্ট নয়, বরং কিভাবে আধুনিক এআই এসিস্ট্যান্ট ব্যবহার করে দ্রুত ও মানসম্মত প্রজেক্ট তৈরি করা যায়, তা জানা আবশ্যক।</p>
+                    <p>ভবিষ্যতের ওয়েব হবে আরও বেশি ইন্টারেক্টিভ ও পার্সোনালাইজড। সিঙ্গেল পেজ অ্যাপ্লিকেশন (SPA) থেকে শুরু করে সার্ভার সাইড রেন্ডারিং (SSR) যেমন Next.js ও Angular এর আধুনিক ফিচারগুলো এখন ইন্ডাস্ট্রির স্ট্যান্ডার্ড হয়ে দাঁড়িয়েছে। এছাড়া ওয়েব ৩.০ এবং মেটাভার্সের ধারণাও ওয়েব প্রযুক্তিতে নতুন মাত্রা যোগ করছে।</p>
+                    <p>তাই একজন সফল ডেভেলপার হতে হলে প্রতিনিয়ত নতুন প্রযুক্তির সাথে নিজেকে খাপ খাইয়ে নিতে হবে এবং কোডের পাশাপাশি সিস্টেম আর্কিটেকচার ও ইউজার এক্সপেরিয়েন্সের (UX) দিকেও সমান মনোযোগ দিতে হবে।</p>
+                </div>
+                <button class="btn-readmore">Read More</button>
+            </div>
+
+            <!-- Card 3: Software Engineering Career Guideline -->
+            <div class="blog-card">
+                <div>
+                    <div class="blog-category">Career</div>
+                    <div class="blog-title">সফটওয়্যার ইঞ্জিনিয়ারিং ক্যারিয়ার গাইডলাইন</div>
+                    <div class="blog-meta">June 27, 2026 • 6 min read</div>
+                    <div class="blog-excerpt">
+                        অনেকেই সফটওয়্যার ইঞ্জিনিয়ার হতে চান কিন্তু সঠিক গাইডলাইন পান না। প্রোগ্রামিং শেখা থেকে শুরু করে প্রথম চাকরি পাওয়া পর্যন্ত প্রতিটি ধাপ অত্যন্ত গুরুত্বপূর্ণ...
+                    </div>
+                </div>
+                <div class="full-content" style="display:none;">
+                    <p>অনেকেই সফটওয়্যার ইঞ্জিনিয়ার হতে চান কিন্তু সঠিক গাইডলাইন পান না। প্রোগ্রামিং শেখা থেকে শুরু করে প্রথম চাকরি পাওয়া পর্যন্ত প্রতিটি ধাপ অত্যন্ত গুরুত্বপূর্ণ। প্রথমত, যেকোনো একটি প্রোগ্রামিং ল্যাঙ্গুয়েজ (যেমন C#, Java, বা Python) খুব ভালোভাবে আয়ত্ত করা উচিত।</p>
+                    <p>দ্বিতীয়ত, ডাটা স্ট্রাকচার ও অ্যালগরিদম (DSA) এর ওপর ভালো দখল থাকতে হবে। এটি সমস্যা সমাধানের দক্ষতা বাড়ায় যা বড় বড় টেক কোম্পানির ইন্টারভিউ পাস করার জন্য অপরিহার্য। সমান্তরালভাবে গিট (Git) ও গিটহাব (GitHub) ব্যবহার করে টিমওয়ার্ক ও কোড ম্যানেজমেন্ট শিখতে হবে।</p>
+                    <p>সবশেষে, নিজের শেখা টেকনোলজি ব্যবহার করে বাস্তবসম্মত কিছু প্রজেক্ট তৈরি করতে হবে এবং সেগুলোকে পোর্টফোলিওতে সুন্দরভাবে প্রদর্শন করতে হবে। প্রতিনিয়ত প্রবলেম সলভিং এবং নেটওয়ার্কিং করার মাধ্যমে খুব সহজেই এই ফিল্ডে ক্যারিয়ার গড়া সম্ভব।</p>
+                </div>
+                <button class="btn-readmore">Read More</button>
+            </div>
+        </div>
 
         <footer>
             <h3>Mahfuz Ahammed</h3>
@@ -211,6 +509,23 @@
         </footer>
     </main>
 
+    <!-- Glassmorphic Modal for Blog Post Details -->
+    <div class="modal" id="blogModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                </svg>
+            </button>
+            <div class="modal-header-meta" id="modalCategory">Story</div>
+            <h2 class="modal-title" id="modalTitle">Blog Post Title</h2>
+            <div class="modal-date" id="modalDate">Post Date</div>
+            <div class="modal-body" id="modalBody">
+                <!-- Blog content will be injected here -->
+            </div>
+        </div>
+    </div>
+
 <script>
 // navbar active state
 document.addEventListener('DOMContentLoaded', function() {
@@ -222,6 +537,86 @@ document.addEventListener('DOMContentLoaded', function() {
         const linkPage = link.getAttribute('href');
         if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
             link.classList.add('active');
+        }
+    });
+
+    // Toggle mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navMenu.classList.toggle('open');
+            if (navMenu.classList.contains('open')) {
+                menuToggle.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                    </svg>
+                `;
+            } else {
+                menuToggle.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+                    </svg>
+                `;
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('open');
+                menuToggle.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+                    </svg>
+                `;
+            }
+        });
+    }
+
+    // Modal details view logic
+    const modal = document.getElementById('blogModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCategory = document.getElementById('modalCategory');
+    const modalDate = document.getElementById('modalDate');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+
+    document.querySelectorAll('.btn-readmore').forEach(button => {
+        button.addEventListener('click', function() {
+            const card = this.closest('.blog-card');
+            const title = card.querySelector('.blog-title').innerText;
+            const category = card.querySelector('.blog-category').innerText;
+            const meta = card.querySelector('.blog-meta').innerText;
+            const fullContent = card.querySelector('.full-content').innerHTML;
+            
+            modalTitle.innerText = title;
+            modalCategory.innerText = category;
+            modalDate.innerText = meta;
+            modalBody.innerHTML = fullContent;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // prevent scrolling behind modal
+        });
+    });
+
+    const closeModal = () => {
+        modal.classList.remove('open');
+        document.body.style.overflow = ''; // restore scrolling
+    };
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+            closeModal();
         }
     });
 

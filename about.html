@@ -44,6 +44,7 @@
         top: 0;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 15px 40px;
         background: rgba(0,0,0,0.4);
         backdrop-filter: blur(10px);
@@ -60,6 +61,7 @@
         display: flex;
         gap: 20px;
         list-style: none;
+        align-items: center;
     }
 
     .navbar li {
@@ -95,6 +97,21 @@
         border-right: 6px solid transparent;
         border-bottom: 6px solid #0ea5e9;
     }
+
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+        transform: scale(1.1);
+    }
+
 
     /* SECTIONS */
     section {
@@ -140,6 +157,72 @@
     footer nav ul li {
         padding: 0 10px;
     }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    figure {
+        max-width: 280px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+        .navbar {
+            padding: 15px 20px;
+        }
+        .menu-toggle {
+            display: block;
+        }
+        .navbar ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            flex-direction: column;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            gap: 15px;
+            display: none;
+        }
+        .navbar ul.open {
+            display: flex;
+            animation: slideDown 0.3s ease forwards;
+        }
+        .navbar li a.active::after {
+            display: none;
+        }
+        .navbar li a {
+            display: block;
+            text-align: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        section {
+            padding: 40px 20px;
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
     </style>
 </head>
 
@@ -150,7 +233,12 @@
     <header class="navbar">
         <h2>Mahfuz Ahammed</h2>
         <nav>
-            <ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+                </svg>
+            </button>
+            <ul id="navMenu">
                 <li><a href="index.html" class="nav-link" data-page="home">Home</a></li>
                 <li><a href="about.html" class="nav-link" data-page="about">About</a></li>
                 <li><a href="blog.html" class="nav-link" data-page="blog">Blog</a></li>
@@ -344,6 +432,42 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('active');
         }
     });
+
+    // Toggle mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navMenu.classList.toggle('open');
+            if (navMenu.classList.contains('open')) {
+                menuToggle.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                    </svg>
+                `;
+            } else {
+                menuToggle.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+                    </svg>
+                `;
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('open');
+                menuToggle.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
+                    </svg>
+                `;
+            }
+        });
+    }
 
     // smooth page transition
     navLinks.forEach(link => {
