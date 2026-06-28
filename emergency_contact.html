@@ -532,14 +532,40 @@
                     <label for="filterProfession">২. পেশা সিলেক্ট করুন (Profession):</label>
                     <select id="filterProfession" onchange="onFilterChange()">
                         <option value="">সকল পেশা</option>
+
                         <option value="ডাক্তার">ডাক্তার</option>
-                        <option value="কাঠ মিস্ত্রি">কাঠ মিস্ত্রি</option>
-                        <option value="রাজমিস্ত্রী">রাজমিস্ত্রী</option>
-                        <option value="রাজনীতীবিদ">রাজনীতীবিদ</option>
-                        <option value="দোকানদান">দোকানদান</option>
+                        <option value="পশু ডাক্তার">পশু ডাক্তার</option>
+                        <option value="হার্ট বিশেষজ্ঞ">হার্ট বিশেষজ্ঞ</option>
+                        <option value="চর্ম বিশেষজ্ঞ">চর্ম বিশেষজ্ঞ</option>
                         <option value="শিক্ষক">শিক্ষক</option>
-                        <option value="মোবাইল ব্যাংক">মোবাইল ব্যাংক</option>
-                        <option value="এজেন্ট ব্যাংক">এজেন্ট ব্যাংক</option>
+                        <option value="কাঠ মিস্ত্রি">কাঠ মিস্ত্রি</option>
+                        <option value="ওয়েল্ডিং মিস্ত্রি">ওয়েল্ডিং মিস্ত্রি</option>
+                        <option value="ইলেকট্রনিক্স মিস্ত্রি">ইলেকট্রনিক্স মিস্ত্রি</option>
+                        <option value="কর্মকার">কর্মকার</option>
+                        <option value="জমির মুহুরি">জমির মুহুরি</option>
+                        <option value="ফলের দোকান">ফলের দোকান</option>
+                        <option value="মিষ্টির দোকান">মিষ্টির দোকান</option>
+                        <option value="হার্ডওয়্যার">হার্ডওয়্যার</option>
+                        <option value="জুয়েলার্স">জুয়েলার্স</option>
+                        <option value="ব্যবসায়ী">ব্যবসায়ী</option>
+                        <option value="দোকানদার">দোকানদার</option>
+                        <option value="সার ও তেল ব্যবসায়ী">সার ও তেল ব্যবসায়ী</option>
+                        <option value="প্লাস্টিক ব্যবসায়ী">প্লাস্টিক ব্যবসায়ী</option>
+                        <option value="ফটোস্ট্যাট">ফটোস্ট্যাট</option>
+                        <option value="ফটোস্ট্যাট ও মোবাইল পার্টস">ফটোস্ট্যাট ও মোবাইল পার্টস</option>
+                        <option value="মোবাইল ও ইলেকট্রনিক্স">মোবাইল ও ইলেকট্রনিক্স</option>
+                        <option value="হোমিও ও ইসলামি লাইব্রেরি">হোমিও ও ইসলামি লাইব্রেরি</option>
+                        <option value="ব্যাংকিং সেবা">ব্যাংকিং সেবা</option>
+                        <option value="অটো সার্ভিস">অটো চালক</option>
+                        <option value="পরিবহন">পরিবহন</option>
+                        <option value="ভ্যান চালক">ভ্যান চালক</option>
+
+                        <option value="রাইস মিল">রাইস মিল</option>
+                        <option value="ভেটেরিনারি ঔষধ বিক্রেতা">ভেটেরিনারি ঔষধ বিক্রেতা</option>
+
+                        <option value="সুইপার">সুইপার</option>
+                        <option value="ডাক্তারের সিরিয়াল">ডাক্তারের সিরিয়াল</option>
+                        <option value="৩ নং ওয়ার্ড মেম্বার">ওয়ার্ড মেম্বার</option>
                     </select>
                 </div>
 
@@ -590,17 +616,62 @@
     <script>
         // জরুরি যোগাযোগের তথ্য
         const contactsData = [
-            { name: "রুবেল হোসেন", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01913051494", description: "মানুষের ডাক্তার" },
-            { name: "ডাক্তার দুলাল", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01930460788", description: "পশু ডাক্তার" },
-            { name: "আব্দুস সালাম", profession: "কাঠ মিস্ত্রি", village: "বিষ্ণুপুর", phone: "01938519530", description: "কাঠমিস্ত্রী" },
+            { name: "রুবেল হোসেন", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01913051494", description: "মানুষের ডাক্তার, সাধারণ রোগের চিকিৎসা" },
+            { name: "ডাক্তার দুলাল", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01930460788", description: "পশু ডাক্তার, গবাদি পশুর চিকিৎসা" },
+            { name: "আব্দুস সালাম", profession: "কাঠ মিস্ত্রি", village: "বিষ্ণুপুর", phone: "01938519530", description: "ঘর, দরজা, জানালা ও আসবাবপত্র তৈরির কাজ" },
 
-            // বাকি সকল পেশার ডামি তথ্য
-            { name: "মোঃ", profession: "রাজমিস্ত্রী", village: "বিষ্ণুপুর", phone: "0111111111", description: "পাকা বাড়ির রাজমিস্ত্রী" },
-            { name: "আনোয়ার হোসেন", profession: "রাজনীতীবিদ", village: "বিষ্ণুপুর", phone: "0111111111", description: "বিষ্ণুপুর বিএনপি নেতা" },
-            { name: "টিটুল", profession: "দোকানদান", village: "বিষ্ণুপুর", phone: "0111111111", description: "মুদি দোকানদার" },
-            { name: "মাইমুন হাসান মোহন", profession: "শিক্ষক", village: "বিষ্ণুপুর", phone: "0111111111", description: " এনলাইটেন একাডেমি কোচিং শিক্ষক" },
-            { name: "রুবেল ডাক্তার", profession: "মোবাইল ব্যাংক", village: "বিষ্ণুপুর", phone: "0111111111", description: "বিকাশ, রকেট ও নগদ এজেন্ট সেবা" },
-            { name: "সোহেল", profession: "এজেন্ট ব্যাংক", village: "বিষ্ণুপুর", phone: "0111111111", description: "ডাচ বাংলা ব্যাংক" },
+            { name: "সাইব কম্পিউটার ও ফটোস্টাট", profession: "ফটোস্ট্যাট ও মোবাইল পার্টস", village: "বিষ্ণুপুর", phone: "01716352205", description: "ফটোকপি, প্রিন্ট, মোবাইল পার্টস বিক্রি ও কম্পিউটার সেবা" },
+            { name: "নিশান ফল ভান্ডার", profession: "ফলের দোকান", village: "বিষ্ণুপুর", phone: "01905465861", description: "তাজা মৌসুমি ফলের দোকান, বাজারে অবস্থিত" },
+            { name: "ওয়াশিকুর হার্ডওয়্যার", profession: "হার্ডওয়্যার", village: "বিষ্ণুপুর", phone: "01739490450", description: "রড, সিমেন্ট, রং ও নির্মাণ সামগ্রী বিক্রয়" },
+            { name: "শরিফুল স্যার ১", profession: "শিক্ষক", village: "বিষ্ণুপুর", phone: "01581561007", description: "শিক্ষক ও প্রাইভেট পড়ান" },
+            { name: "নাসির স্যার", profession: "শিক্ষক", village: "বিষ্ণুপুর", phone: "01915013226", description: "স্কুল শিক্ষক ও প্রাইভেট পড়ান" },
+            { name: "কিনার", profession: "পশু ডাক্তার", village: "বিষ্ণুপুর", phone: "01926282639", description: "গরু, ছাগল ও অন্যান্য গবাদি পশুর চিকিৎসা" },
+            { name: "সোহান স্যার", profession: "শিক্ষক", village: "বিষ্ণুপুর", phone: "01962539000", description: "শিক্ষক ও শিক্ষার্থীদের কোচিং করান" },
+            { name: "লতা ডাক্তার", profession: "হার্ট বিশেষজ্ঞ", village: "বিষ্ণুপুর", phone: "01315492697", description: "হৃদরোগ বিশেষজ্ঞ, রাজশাহীতে চেম্বার" },
+            { name: "সাকিব", profession: "ওয়েল্ডিং মিস্ত্রি", village: "বিষ্ণুপুর", phone: "01926391913", description: "লোহার গেট, গ্রিল ও ওয়েল্ডিং কাজ" },
+            { name: "হানিফ অটো", profession: "অটো সার্ভিস", village: "বিষ্ণুপুর", phone: "01936464849", description: "অটোরিকশা ভাড়া ও পরিবহন সেবা" },
+            { name: "শরিফুল স্যার ২", profession: "শিক্ষক", village: "বিষ্ণুপুর", phone: "01716710961", description: "শিক্ষক ও প্রাইভেট পড়ান" },
+            { name: "তুষার সিকদার", profession: "চর্ম বিশেষজ্ঞ", village: "বিষ্ণুপুর", phone: "01996125474", description: "চর্ম ও ত্বকের রোগের চিকিৎসা" },
+            { name: "পুরবাসা পরিবহন", profession: "পরিবহন", village: "দামুড়হুদা বাজার", phone: "01918042864", description: "চুয়াডাঙ্গা থেকে ঢাকা যাত্রী পরিবহন" },
+            { name: "জমির", profession: "কাঠ মিস্ত্রি", village: "বিষ্ণুপুর", phone: "01852827399", description: "কাঠের আসবাবপত্র ও নির্মাণ কাজ" },
+            { name: "মুন্না", profession: "সুইপার", village: "বিষ্ণুপুর", phone: "01959858683", description: "পরিচ্ছন্নতা ও পরিষ্কার-পরিচ্ছন্নতার কাজ" },
+            { name: "আবদুল্লাহ হোমিও হল ও ইসলামি লাইব্রেরি", profession: "হোমিও ও ইসলামি লাইব্রেরি", village: "বিষ্ণুপুর", phone: "01938578891", description: "হোমিও ওষুধ, ইসলামি বই ও স্টেশনারি" },
+            { name: "স্বপন প্লাস্টিক", profession: "প্লাস্টিক ব্যবসায়ী", village: "বিষ্ণুপুর", phone: "01902949552", description: "প্লাস্টিক পণ্যের পাইকারি ও খুচরা বিক্রয়" },
+            { name: "সুনিল কর্মকার", profession: "কর্মকার", village: "বিষ্ণুপুর", phone: "01938860240", description: "লোহার বিভিন্ন জিনিস তৈরি ও মেরামত" },
+            { name: "বাসুদেব ফটোস্ট্যাট", profession: "ফটোস্ট্যাট ও মোবাইল পার্টস", village: "বিষ্ণুপুর", phone: "01926207246", description: "ফটোকপি, প্রিন্ট, মোবাইল পার্টস ও রিচার্জ সেবা" },
+            { name: "রনি মোবাইল সার্ভিস ও ইলেকট্রনিক সেন্টার", profession: "মোবাইল ও ইলেকট্রনিক্স", village: "বিষ্ণুপুর", phone: "01806310289", description: "মোবাইল ও ইলেকট্রনিক্স পণ্য বিক্রি ও মেরামত" },
+            { name: "কুদ্দুস", profession: "সার ও তেল ব্যবসায়ী", village: "বিষ্ণুপুর", phone: "01408254305", description: "কৃষি সার, কীটনাশক ও তেল বিক্রি" },
+            { name: "শাহিন হার্ডওয়্যার", profession: "হার্ডওয়্যার", village: "বিষ্ণুপুর", phone: "01965112117", description: "বাড়ি নির্মাণের হার্ডওয়্যার সামগ্রী" },
+            { name: "বাবু ফল ভান্ডার", profession: "ফলের দোকান", village: "বিষ্ণুপুর", phone: "01993091075", description: "দেশি ও বিদেশি ফলের দোকান" },
+            { name: "পার্থ জুয়েলার্স", profession: "জুয়েলার্স", village: "বিষ্ণুপুর", phone: "01952096180", description: "স্বর্ণ ও রৌপ্যের গহনা বিক্রয়" },
+            { name: "মেসার্স রাসেল ট্রেডার্স", profession: "ব্যবসায়ী", village: "বিষ্ণুপুর", phone: "01919124277", description: "বিভিন্ন নিত্যপ্রয়োজনীয় পণ্যের ব্যবসা" },
+            { name: "শিলন ফটোস্ট্যাট", profession: "ফটোস্ট্যাট", village: "বিষ্ণুপুর", phone: "01965830183", description: "ফটোকপি, প্রিন্ট ও ডকুমেন্ট সার্ভিস" },
+            { name: "ডাচ বাংলা ব্যাংক", profession: "ব্যাংকিং সেবা", village: "বিষ্ণুপুর", phone: "01912831932", description: "মোবাইল ব্যাংকিং, এজেন্ট ব্যাংকিং ও টাকা লেনদেন" },
+            { name: "মিলন ফটোস্ট্যাট", profession: "ফটোস্ট্যাট", village: "বিষ্ণুপুর", phone: "01918010986", description: "ফটোকপি ও প্রিন্টিং সেবা" },
+            { name: "আবজাল", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01963709122", description: "সাধারণ রোগের চিকিৎসা" },
+            { name: "নাহিদ", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01988895389", description: "সাধারণ রোগের চিকিৎসা" },
+            { name: "টিটুল", profession: "দোকানদার", village: "বিষ্ণুপুর", phone: "01919617822", description: "মুদিখানা ও নিত্যপ্রয়োজনীয় পণ্যের দোকান" },
+            { name: "আতর", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01917253284", description: "সাধারণ রোগের চিকিৎসা" },
+            { name: "নিশান", profession: "ডাক্তারের সিরিয়াল", village: "বিষ্ণুপুর", phone: "01921148306", description: "নয়ন ডাক্তারের সিরিয়াল ও অ্যাপয়েন্টমেন্ট" },
+            { name: "বকুল", profession: "ভ্যান চালক", village: "বিষ্ণুপুর", phone: "01858163005", description: "ভ্যানে যাত্রী ও মালামাল পরিবহন" },
+            { name: "বাসেত", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01931243471", description: "চুয়াডাঙ্গার ডাক্তার" },
+            { name: "ঝড়ু মিষ্টি", profession: "মিষ্টির দোকান", village: "বিষ্ণুপুর", phone: "01401623857", description: "দেশি মিষ্টি ও দুগ্ধজাত পণ্য" },
+            { name: "আয়াত ফটোস্ট্যাট", profession: "ফটোস্ট্যাট ও মোবাইল পার্টস", village: "বিষ্ণুপুর", phone: "01817556203", description: "ফটোকপি, প্রিন্ট ও মোবাইল পার্টস বিক্রি" },
+            { name: "খোকন মেম্বার", profession: "৩ নং ওয়ার্ড মেম্বার", village: "বিষ্ণুপুর", phone: "01930545580", description: "স্থানীয় জনপ্রতিনিধি" },
+            { name: "সন্জু", profession: "ডাক্তার ও শিক্ষক", village: "বিষ্ণুপুর", phone: "01718181035", description: "শিক্ষক ও সাধারণ রোগের চিকিৎসা" },
+            { name: "সাইফুল মাস্টার", profession: "শিক্ষক", village: "বিষ্ণুপুর", phone: "01916303312", description: "স্কুল শিক্ষক" },
+            { name: "সালাউদ্দিন অটো", profession: "অটো সার্ভিস", village: "বিষ্ণুপুর", phone: "01912466889", description: "অটোরিকশা পরিবহন সেবা" },
+            { name: "সোহাগ", profession: "ইলেকট্রনিক্স মিস্ত্রি", village: "বিষ্ণুপুর", phone: "01960239597", description: "টিভি, ফ্যান ও ইলেকট্রনিক্স মেরামত" },
+            { name: "আব্দুর রাজ্জাক রাজা", profession: "জমির মুহুরি", village: "বিষ্ণুপুর", phone: "01914780028", description: "জমি রেজিস্ট্রি ও দলিল সংক্রান্ত কাজ" },
+            { name: "টোকন মোবাইল সার্ভিস ও ইলেকট্রনিক সেন্টার", profession: "মোবাইল ও ইলেকট্রনিক্স", village: "বিষ্ণুপুর", phone: "01939012342", description: "মোবাইল সার্ভিসিং ও ইলেকট্রনিক্স মেরামত" },
+            { name: "কুতুবউদ্দিন মিল", profession: "রাইস মিল", village: "বিষ্ণুপুর", phone: "01993216118", description: "ধান ভাঙানো ও চাল উৎপাদন" },
+            { name: "জামল উদ্দিন মিল", profession: "রাইস মিল", village: "বিষ্ণুপুর", phone: "0173293838", description: "ধান ভাঙানো ও চাল উৎপাদন" },
+            { name: "ইমন আলী মিল", profession: "রাইস মিল", village: "বিষ্ণুপুর", phone: "01912073418", description: "ধান ভাঙানো ও চাল উৎপাদন" },
+            { name: "রকিবুল ইসলাম মিল", profession: "রাইস মিল", village: "বিষ্ণুপুর", phone: "01923745930", description: "ধান ভাঙানো ও চাল উৎপাদন" },
+            { name: "ফারুক হোসেন মিল", profession: "রাইস মিল", village: "বিষ্ণুপুর", phone: "01774633971", description: "ধান ভাঙানো ও চাল উৎপাদন" },
+            { name: "শিমুল", profession: "ভেটেরিনারি ঔষধ বিক্রেতা", village: "বিষ্ণুপুর", phone: "01402183938", description: "পশুর ওষুধ ও খাদ্য বিক্রি" },
+            { name: "সোলাইমান হোসেন", profession: "পশু ডাক্তার", village: "বিষ্ণুপুর", phone: "01992248964", description: "গবাদি পশুর চিকিৎসা ও পরামর্শ" },
+            { name: "খোকন", profession: "পশু ডাক্তার", village: "বিষ্ণুপুর", phone: "01721392871", description: "গবাদি পশুর চিকিৎসা ও টিকা প্রদান" },
 
             // অন্যান্য গ্রামের ডামি তথ্য (ফিল্টারিং টেস্ট করার সুবিধার্থে)
             { name: "কামাল উদ্দিন", profession: "কাঠ মিস্ত্রি", village: "জুড়ানপুর", phone: "01812345678", description: "ফার্নিচার ও দরজার কাঠ মিস্ত্রি" },
