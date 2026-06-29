@@ -135,6 +135,10 @@
 
         /* SEARCH & FILTER BOX */
         .filter-container {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+
             background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -146,9 +150,8 @@
 
         .filter-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
             gap: 20px;
-            margin-bottom: 20px;
         }
 
         .filter-group {
@@ -165,6 +168,10 @@
 
         .filter-group select,
         .filter-group input {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+
             padding: 12px 15px;
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
@@ -389,8 +396,13 @@
             color: white;
         }
 
-        /* RESPONSIVE DESIGN */
+        /* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+        /* Tablet */
         @media (max-width: 992px) {
+
             .navbar {
                 padding: 15px 20px;
             }
@@ -407,48 +419,170 @@
                 flex-direction: column;
                 background: rgba(15, 23, 42, 0.95);
                 backdrop-filter: blur(15px);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                border-bottom: 1px solid rgba(255, 255, 255, .1);
                 padding: 20px 0;
                 gap: 15px;
                 display: none;
+                z-index: 999;
             }
 
             .navbar ul.open {
                 display: flex;
-                animation: slideDown 0.3s ease forwards;
+                animation: slideDown .3s ease forwards;
+            }
+
+            .navbar li a {
+                display: block;
+                width: 90%;
+                margin: auto;
+                text-align: center;
             }
 
             .navbar li a.active::after {
                 display: none;
             }
 
-            .navbar li a {
-                display: block;
-                text-align: center;
-                width: 80%;
-                margin: 0 auto;
+            main {
+                padding: 40px 25px;
+            }
+
+            .filter-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .contact-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
-        @media (max-width: 768px) {
-            main {
-                padding: 40px 20px;
-            }
+
+        /* Mobile */
+        @media (max-width:768px) {
 
             h1 {
                 font-size: 2rem;
             }
 
+            h2 {
+                font-size: 1rem;
+            }
+
+            main {
+                width: 100%;
+                max-width: 100%;
+                padding: 20px 12px;
+            }
+
             .filter-container {
-                padding: 20px;
+                width: 100%;
+                max-width: 100%;
+                padding: 15px;
+                overflow: hidden;
             }
 
             .filter-grid {
+                display: grid;
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .filter-group {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .filter-group label {
+                font-size: 14px;
+            }
+
+            .filter-group select,
+            .filter-group input {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+                box-sizing: border-box;
+                font-size: 16px;
             }
 
             .contact-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .profession-badge {
+                margin-top: 8px;
+            }
+
+            .card-actions {
+                flex-direction: column;
+            }
+
+            .btn-call {
+                width: 100%;
+            }
+
+            footer {
+                padding: 25px 15px;
+            }
+
+            footer nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+
+        /* Small Mobile */
+        @media (max-width:480px) {
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: .95rem;
+            }
+
+            .navbar {
+                padding: 12px;
+            }
+
+            .navbar h2 {
+                font-size: 18px;
+            }
+
+            main {
+                padding: 15px 8px;
+            }
+
+            .filter-container {
+                padding: 12px;
+                border-radius: 10px;
+            }
+
+            .contact-card {
+                padding: 16px;
+            }
+
+            .contact-name {
+                font-size: 1.1rem;
+            }
+
+            .profession-badge {
+                font-size: .75rem;
+            }
+
+            .btn-call {
+                font-size: 15px;
+            }
+
+            .filter-group select,
+            .filter-group input {
+                padding: 10px 12px;
             }
         }
 
@@ -596,9 +730,11 @@
             </ul>
         </nav>
         <p>© 2026 Mahfuz Ahammed. All Rights Reserved.</p>
-        <div class="visitor-counter" style="margin-top: 15px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
+        <div class="visitor-counter"
+            style="margin-top: 15px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="color: #38bdf8;">
-                <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17Z"/>
+                <path
+                    d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17Z" />
             </svg>
             <span>Visitors:</span>
             <span id="visitor-count-val" style="font-weight: bold; color: #38bdf8;">...</span>
@@ -650,7 +786,7 @@
             { name: "বাসেত ডাক্তার", profession: "ডাক্তার", village: "বিষ্ণুপুর", phone: "01931243471", description: "চুয়াডাঙ্গার ডাক্তার" },
             { name: "ঝড়ু মিষ্টি", profession: "মিষ্টির দোকান", village: "বিষ্ণুপুর", phone: "01401623857", description: "দেশি মিষ্টি ও দুগ্ধজাত পণ্য" },
             { name: "আয়াত ফটোস্ট্যাট", profession: "ফটোস্ট্যাট ও মোবাইল পার্টস", village: "বিষ্ণুপুর", phone: "01817556203", description: "ফটোকপি, প্রিন্ট ও মোবাইল পার্টস বিক্রি" },
-            { name: "খোকন মেম্বার", profession: "৩ নং ওয়ার্ড মেম্বার", village: "বিষ্ণুপুর", phone: "01930545580", description: "স্থানীয় জনপ্রতিনিধি" },
+            { name: "খোকন মেম্বার", profession: "ওয়ার্ড মেম্বার", village: "বিষ্ণুপুর", phone: "01930545580", description: "স্থানীয় জনপ্রতিনিধি ৩ নং ওয়ার্ড, বিষ্ণুপুর" },
             { name: "সন্জু ডাক্তার", profession: "ডাক্তার ও শিক্ষক", village: "বিষ্ণুপুর", phone: "01718181035", description: "শিক্ষক ও সাধারণ রোগের চিকিৎসা" },
             { name: "সাইফুল মাস্টার", profession: "শিক্ষক", village: "বিষ্ণুপুর", phone: "01916303312", description: "স্কুল শিক্ষক" },
             { name: "সালাউদ্দিন অটো", profession: "অটো সার্ভিস", village: "বিষ্ণুপুর", phone: "01912466889", description: "অটোরিকশা পরিবহন সেবা" },
